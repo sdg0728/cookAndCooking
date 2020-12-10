@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.command.ajax.userRecipe.UserRecipeDAO">
+
+	<insert id="insert" flushCache="true" parameterType="com.proj.beans.userRecipe.RecipeWriteDTO">
+		INSERT INTO USER_RECIPE
+		(USER_RID,NAME,KIND,TASTE,IMG,INGREDIENT,REGDATE,
+             RECIPE_1,RECIPE_2,RECIPE_3,RECIPE_4,RECIPE_5,RECIPE_6
+             ,RECIPE_7,RECIPE_8,RECIPE_9,RECIPE_10,USER_ID)
+		VALUES
+		(userrid_seq.nextval,#{name},#{kind},#{taste},#{img},#{ingredient},SYSDATE ,#{recipe_1},#{recipe_2},
+		#{recipe_3},#{recipe_4},#{recipe_5},#{recipe_6},#{recipe_7},#{recipe_8},#{recipe_9},#{recipe_10},(SELECT USER_ID FROM USER_INFO WHERE EMAIL = #{email}))
+
+	</insert>
+
+
+<select id="selectByEmail" resultType="com.proj.beans.userRecipe.RecipeWriteDTO">
+	SELECT * from USER_RECIPE where USER_ID = (SELECT USER_ID FROM USER_INFO WHERE EMAIL = #{email}) order by user_rid desc
+</select>
+
+<select id="selectByAllEmail" resultType="com.proj.beans.userRecipe.RecipeWriteDTO">
+	select * from user_recipe order by user_rid desc
+</select> 
+
+<delete id="deleteByUid" flushCache="true" >
+	delete from user_recipe where user_rid = #{user_rid}
+</delete>	
+<update id="update" flushCache="true" >
+	UPDATE user_recipe SET name=#{a.name}, kind=#{a.kind}, taste=#{a.taste}, img=#{a.img} ,ingredient=#{a.ingredient}, recipe_1=#{a.recipe_1},recipe_2=#{a.recipe_2},
+		recipe_3=#{a.recipe_3},recipe_4=#{a.recipe_4},recipe_5=#{a.recipe_5},recipe_6=#{a.recipe_6},recipe_7=#{a.recipe_7}, recipe_8=#{a.recipe_8},
+		recipe_9=#{a.recipe_9},recipe_10=#{a.recipe_10} WHERE user_rid=#{param1}
+</update>
+
+
+
+
+<select id="selectAll" resultType="com.proj.beans.userRecipe.RecipeWriteDTO">
+	select R.*, U.name email from user_recipe R, user_info U where R.user_id = U.user_id order by user_rid desc
+</select>
+
+<select id="selectBykind" resultType="com.proj.beans.userRecipe.RecipeWriteDTO">
+	select K.*, U.name email from
+	(select * from user_recipe where kind = #{kind}) K, user_info U 
+	where K.user_id = U.user_id order by user_rid desc
+</select>
+
+
+<select id="notifySelect" parameterType="hashmap" resultType="int">
+	SELECT  count(* )from notify where user_id =#{user_id} and user_rid=#{user_rid}   
+</select>
+
+<insert id="notifyInsert" parameterType="hashmap"  flushCache="true" >
+	INSERT INTO notify(user_rid, user_id) VALUES (#{user_rid }, #{user_id}) 
+</insert>
+
+<delete id="notifydelete" parameterType="hashmap"  flushCache="true" >
+DELETE FROM notify WHERE (user_rid, user_id)=(SELECT user_rid, user_id from notify WHERE user_rid=#{user_rid} AND user_id=#{user_id})
+</delete>
+
+
+<select id="selectByAdminAll"  resultType="com.proj.beans.userRecipe.RecipeWriteDTO">
+	SELECT * FROM USER_RECIPE ORDER BY regdate desc
+</select>
+
+<select id="selectByNotify" resultType="com.proj.beans.userRecipe.RecipeWriteDTO">
+	SELECT * from USER_RECIPE where USER_RID in(SELECT distinct USER_RID FROM notify)
+</select>
+
+<select id="search" resultType="com.proj.beans.userRecipe.RecipeWriteDTO">
+    SELECT * FROM USER_RECIPE WHERE name LIKE #{search}
+ </select>
+
+<insert id="preference" flushCache="true">
+	insert into ur_like
+	(user_id, user_rid, preference)
+	values
+	((select user_id from user_info where email = #{user_id}), #{user_rid}, #{preference})
+</insert>
+
+<select id="preferenceChk" resultType="com.proj.beans.userRecipe.PreferenceDTO">
+	select * FROM ur_like where user_id = (select user_id from user_info where email = #{user_id}) and user_rid = #{user_rid}
+</select>
+
+<delete id="preferenceDel" flushCache="true">
+	delete from ur_like where user_id = (select user_id from user_info where email = #{user_id}) and user_rid = #{user_rid}
+</delete>
+
+<update id="userScore" flushCache="true">
+update user_info set
+score = (select (score + #{preference}) from user_info where user_id = (select user_id from user_info where name = #{user_id}))
+where user_id = (select user_id from user_info where name = #{user_id})
+</update>
+
+<insert id="commentInsert" flushCache="true">
+insert into ur_comment (cid, content, regdate, user_rid, user_id) 
+values (user_recipe_comment_seq.nextval,#{content}, sysdate, #{user_rid},
+(select user_id from user_info where email = #{name}))
+</insert>
+
+ <select id="selectByCommentRid" resultType="com.proj.beans.userRecipe.Ur_commentDTO">
+          select * from 
+          (select R.CID,R.content,U.EMAIL , U.USER_ID, U.name, R.user_rid, R.regdate from user_info U, ur_comment R where U.user_id = R.user_id) N
+          where N.user_rid = #{user_rid}
+</select>
+       
+<delete id="deleteComment" parameterType="com.proj.beans.userRecipe.Ur_commentDTO" flushCache="true">
+      delete from ur_comment where cid = #{cid}
+</delete>
+       
+
+</mapper>
+

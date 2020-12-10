@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.proj.beans.purchase.RecipeProductAjaxDAO">
+	<select id="selectByCate" resultType="com.proj.beans.purchase.RecipeProductDTO">
+		<![CDATA[
+	 	SELECT P.*, R.R_SCORE FROM 
+	 	(SELECT T.PID PID ,AVG(T.R_SCORE) R_SCORE FROM P_REVIEW T GROUP BY PID) R,
+		(SELECT * FROM R_PRODUCT WHERE P_KIND = #{kind} ORDER BY PID DESC) P
+		WHERE P.PID = R.PID(+)
+	 	]]>
+	</select>
+	
+	<select id="searchRecipe" resultType="com.proj.beans.purchase.RecipeProductDTO">
+		<![CDATA[
+			SELECT * FROM R_PRODUCT WHERE P_NAME LIKE #{search}
+		]]>
+	</select>
+	
+	<select id="countAll" resultType="int">
+		<![CDATA[
+			SELECT count(*) FROM R_PRODUCT WHERE P_KIND = #{kind}
+		]]>
+	</select>
+	<insert id="insertCart" flushCache="true">
+		INSERT INTO PURCHASE
+		(PURCHASENO, USER_ID, PID, P_NAME, PRICE, BUYDATE, DELIVERCHK, PCHK, COUNT)
+		VALUES
+		(PURCHASE_SEQ.NEXTVAL, (SELECT USER_ID FROM USER_INFO WHERE EMAIL = #{email}), #{pid}, #{p_name}, #{price}, SYSDATE, #{deliverchk}, #{pchk}, #{count})
+	</insert>
+	<update id="update" flushCache="true">
+		UPDATE P_REVIEW SET
+		R_COMMENT = #{r_comment}
+		WHERE PRID = #{prid}
+	</update>
+	<delete id="delete" flushCache="true">
+		DELETE FROM P_REVIEW WHERE PRID = #{prid}
+	</delete>
+	
+	<select id="cartList" resultType="com.proj.beans.purchase.PurchaseDTO">
+		<![CDATA[
+			SELECT * FROM PURCHASE 
+			WHERE USER_ID = (SELECT USER_ID FROM USER_INFO WHERE EMAIL = #{email}) AND DELIVERCHK = 0
+		]]>
+	</select>
+	
+	<delete id="deleteCart" flushCache="true">
+		DELETE FROM PURCHASE WHERE PURCHASENO = #{purchaseno}
+	</delete>
+	
+	<delete id="deleteCartAll" flushCache="true" parameterType="java.util.ArrayList">
+		DELETE FROM PURCHASE
+		WHERE PURCHASENO IN (
+		<foreach collection="array" item="item" index="index" separator=",">${item}</foreach>
+		)
+	</delete>
+	
+	<select id="callUserInfo" resultType="com.proj.beans.member.MemberDTO">
+		SELECT * FROM USER_INFO WHERE EMAIL = #{email}
+	</select>
+	
+	<select id="orderlist" resultType="com.proj.beans.purchase.PurchaseDTO">
+		SELECT * FROM PURCHASE 
+		WHERE USER_ID = (SELECT USER_ID FROM USER_INFO WHERE EMAIL = #{email}) AND DELIVERCHK != 0
+	</select>
+	
+	<update id="buyCart" flushCache="true">
+		UPDATE PURCHASE SET
+		NAME = #{name},
+		DELIVER = #{address},
+		PHONE = #{phone},
+		BUYDATE = SYSDATE,
+		DELIVERCHK = 1
+		WHERE PURCHASENO IN (
+			<foreach collection="purchasenos" item="item" index="index" separator=",">${item}</foreach>
+		)
+	</update>
+	
+	<insert id="adminBuyCart" flushCache="true">
+		INSERT INTO A_PURCHASE A
+		(USER_ID, PID, PRICE, NAME, DELIVER ,PHONE, BUYDATE, DELIVERCHK, PCHK ,COUNT, PURCHASENO, P_NAME)
+		SELECT USER_ID, PID, PRICE, NAME, DELIVER ,PHONE, BUYDATE, DELIVERCHK, PCHK ,COUNT, PURCHASENO, P_NAME FROM PURCHASE P
+		WHERE P.PURCHASENO IN (
+			<foreach collection="purchasenos" item="item" index="index" separator=",">${item}</foreach>
+		)
+	</insert>
+	
+	
+</mapper>

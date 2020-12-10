@@ -1,0 +1,112 @@
+@charset "UTF-8";
+
+body {
+		background: #fff;
+		padding-top: 1em;
+}
+	
+body > section {
+	padding: 10px 0;
+}
+
+#logo_sec {
+	margin: 0 auto;
+	top: 0;
+	position: relative;
+}
+
+#logo-box {
+	text-align: center;
+}
+
+#center-logo {
+	max-height: 200px;
+	
+}
+
+#sign_secA > .container {
+    padding: 16px;
+}
+
+label {
+   font-size: 2.0rem;
+}
+
+
+button {
+	width: 100%;	
+}
+
+
+input[type=password], input[type=email] {
+	
+    width: 100%;
+    padding:6px 20px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+#sign_secA > .container > button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+#sign_secA > .container > button:hover {
+    opacity: 0.8;
+}
+
+
+section p {
+    color: #ee1100;
+    font-size: 0.5em;
+    margin-bottom: 2.5rem;
+}
+
+.row {
+	width: 100%;
+	margin: 0 auto;
+	
+}
+
+.action > li {
+	float: left;
+	width: 50%;
+}
+.action > li > a{
+	width: 100%;
+}
+
+button {
+	width: 100%;
+}
+
+#btn_id_search {
+	height: 4.5rem;
+}
+
+@media (max-width: 767px){
+    select {
+        width: 100%;
+        
+    }
+    
+    .imgBtn {
+    	width: 100%;
+    }
+}
+
+@media (min-width: 768px){
+
+    #sign_secA  > .container { 
+        display: block;
+        max-width: 600px;  
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 22px;
+
+    }
+ 
+}

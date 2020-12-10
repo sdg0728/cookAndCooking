@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:security="http://www.springframework.org/schema/security"
+   xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+   
+   <bean id="customAccessDenied" class="com.proj.security.CustomAccessDeniedHandler" />
+   <bean id="customLoginSuccess" class="com.proj.security.CustomSuccessHandler"/>
+   <bean id="customPasswordEncoder" class="com.proj.security.CustomNoOpPasswordEncoder" />
+   
+   <!-- <security:http pattern="/member/jusoPopup" security="none" /> -->
+   <!-- <security:http pattern="/member/signOk" security="none" /> -->
+   <!-- 컨테이너의 HTTP security 요소 -->
+   <security:http>
+      <!-- 특정 url pattern 요청이 들어올 때 인터셉터를 이용해 접근 제한 설정 -->
+      <security:intercept-url pattern="/member/signOk" access="permitAll"/>
+      <security:intercept-url pattern="/member/id_searchOk" access="permitAll"/>
+      <security:intercept-url pattern="/member/search_popup" access="permitAll"/>
+      
+      <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+      <security:intercept-url pattern="/adminRecipe/**" access="hasRole('ROLE_ADMIN')"/>
+      
+      <security:intercept-url pattern="/purchase/**" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
+      
+      <security:intercept-url pattern="/recipe/**" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
+      
+      <security:intercept-url pattern="/userRecipe/**" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
+      
+      <security:intercept-url pattern="/cooking/**" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
+      
+      <security:intercept-url pattern="/**" access="permitAll"/>
+      
+      <security:form-login login-page="/security/login" 
+               authentication-success-handler-ref="customLoginSuccess"/>
+               
+      <!-- 권한이 없는 에러상황 처리 -->
+      <security:access-denied-handler ref="customAccessDenied"/>
+      
+      <!-- 로그아웃 -->
+      <security:logout logout-url="/security/logout" invalidate-session="true"/>
+   </security:http>
+   
+   <!-- AuthenticationManager 빈 생성 -->
+   <security:authentication-manager>
+   
+      <!-- UserDetailService 사용한 인증과 권한 처리 -->
+      <security:authentication-provider>
+      
+         <!-- JDBC 사용 -->
+         <security:jdbc-user-service data-source-ref="dataSource"
+         users-by-username-query=
+            "SELECT email username, pw password, enabled FROM user_info WHERE email = ?"
+         authorities-by-username-query=
+            "SELECT A.* FROM USER_AUTH A, (SELECT USER_ID FROM USER_INFO WHERE EMAIL = ?) I WHERE A.USER_ID = I.USER_ID"
+         />
+         
+         <!-- PasswordEncoder 설정 -->
+         <security:password-encoder ref="customPasswordEncoder" />
+      </security:authentication-provider>
+   </security:authentication-manager>
+</beans>

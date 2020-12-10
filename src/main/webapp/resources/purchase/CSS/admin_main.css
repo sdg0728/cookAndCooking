@@ -1,0 +1,77 @@
+.top-wrap {
+	width: 100%;
+	height: 50px;
+	margin-top: 20px;
+}
+
+.top-wrap h3 {
+	margin-top: 9px;
+	display: inline-block;
+}
+
+.reg-btn, .btn-delete, .btn-search {
+	width: 100px;
+	height: 40px;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 5px;
+}
+
+.btn-search {
+	margin-top: -2px;
+}
+
+.right {
+	width: auto;
+	height: 40px;
+	float: right;
+}
+
+.admin-search-wrap {
+	display: inline-block;
+	width: auto;
+	height: 40px;
+	margin-right: 5px;
+}
+
+.admin-search {
+	width: 200px;
+	height: 40px;
+	display: inline-block;
+	border-radius: 5px;
+}
+
+.buttons {
+	width: 150px;
+}
+
+button a {
+	color: #fff;
+}
+
+.modal-dialog-centered {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: center;
+	align-items: center;
+	min-height: calc(100% - 1rem);
+}
+
+.modal-dialog-centered::before {
+	display: block;
+	height: calc(100vh - 1rem);
+	height: -webkit-min-content;
+	height: -moz-min-content;
+	height: min-content;
+	content: "";
+}
+
+.w-1000 {
+    width: 700px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    margin-top: -45vh;
+    left: 50%;
+    margin-left: -350px;
+}

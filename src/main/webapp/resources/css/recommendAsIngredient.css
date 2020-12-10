@@ -1,0 +1,199 @@
+@charset "UTF-8";
+
+.content-wrap {
+	width: 1200px;
+	height: auto;
+	margin: 12% auto 0 auto;
+}
+
+.intro-text {
+	width: 100%;
+	position: relative;
+}
+
+.select-category {
+	width: 100%;
+	margin-top: 5%;
+	position: relative;
+}
+
+.select-cate {
+	width: 20%;
+	height: 250px;
+	float: left;
+	border: 2px solid #7BA7AB;
+	border-radius: 5px;
+	box-sizing: border-box;
+	margin-right: 1px;
+	overflow: auto;
+}
+
+.select-cate > div:nth-of-type(1) {
+	width: 100%;
+	height: 15%;
+	background-color: #eaeaea;
+	text-align: center;
+	padding: 3.5%;
+	font-size: 2rem;
+	color: black;
+}
+
+.clear {
+	clear: both;
+}
+
+.result-ingredlient {
+	margin-top: 3%;
+	position: relative;
+	width: 100%;
+	min-height: 60px;
+	box-sizing: border-box;
+	border: 2px solid #7BA7AB;
+	border-radius: 5px;
+	margin-right: 1px;
+}
+
+.result-ingredlient > div:nth-of-type(1) {
+	width:10%;
+	height:100%;
+	background-color: #eaeaea;
+	font-size: 2.1rem;
+	text-align: center;
+	padding: 1.5%;
+	color: black;
+	float: left;
+}
+
+.ingredlient-detail {
+	float: left;
+	width: 90%;
+	height: 100%;
+	padding: 1.7%;
+}
+
+.ingredlient-detail > span {
+	margin-right: 2%;
+}
+.in-del {
+	margin-left: 2px;
+}
+
+.main-content {
+	margin-top: 3%;
+	
+	width: 100%;
+	height: auto;
+	box-sizing: border-box; 
+}
+
+.top-content {
+	width: 100%;
+	height: 10%;	
+	
+}
+
+.intro-cnt {
+	width: 80%;
+	height: 100%;
+	padding: 2%;
+	color: black;
+	float: left;
+}
+
+.intro-cnt > h3 > b {
+	color: red;
+}
+
+.selcet-array {
+	width: 20%;
+	height: 100%;
+	float:left;
+	text-align: center;
+	padding: 2%;
+	padding-left: 10%;
+}
+
+
+.badgebox
+{
+    opacity: 0;
+}
+
+.badgebox + .badge
+{
+    /* Move the check mark away when unchecked */
+    text-indent: -999999px;
+    /* Makes the badge's width stay the same checked and unchecked */
+	width: 27px;
+}
+
+.badgebox:focus + .badge
+{
+    /* Set something to make the badge looks focused */
+    /* This really depends on the application, in my case it was: */
+    
+    /* Adding a light border */
+    box-shadow: inset 0px 0px 5px;
+    /* Taking the difference out of the padding */
+}
+
+.badgebox:checked + .badge
+{
+    /* Move the check mark back when checked */
+	text-indent: 0;
+}
+
+.national_cate > label {
+	width: 100%;
+}
+
+.ingredlient_cate > label {
+	width: 100%;
+}
+
+.cooking_cate > label {
+	width: 100%;
+}
+
+.food_detail {
+	overflow: auto;
+	box-sizing: border-box; 
+	cursor: pointer;
+}
+
+.food_box {
+	float: left;
+	width: 25%;
+	height: 25%;
+	text-align: center;
+	font-size: 1rem;
+	color: white;
+	border: 2px solid #7BA7AB;
+	border-radius: 5px;
+	line-height: 80px;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.researchBtn {
+	width: 7%;
+	height: 4%;
+	margin-top: 16%;
+	float: right;
+	
+	
+}
+
+.researchBtn button {
+	width: 100%;
+	height: 100%;
+}
+
+.back-to-right {
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    
+}
+

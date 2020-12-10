@@ -1,0 +1,84 @@
+<?xmlv version = "1.0" encoding ="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="com.command.ajax.cookingcls.RecipeDAO">
+    	<select id="select" resultType="com.proj.beans.cookingcls.RecipeDTO">
+    		select * from recipe where RID = #{rid}
+ 		
+    	</select>
+    	
+    	<select id="selectByrid" resultType="com.proj.beans.cookingcls.RecipeDTO">
+    		select * 
+    		from
+    		 recipe where RID = #{rid}
+ 		
+    	</select>
+    	
+    	
+    	<!-- 검색 -->
+    	<select id="search" resultType="com.proj.beans.cookingcls.RecipeDTO">
+    		SELECT * FROM recipe WHERE name LIKE #{search}
+
+    	</select>
+    	
+    	
+    	
+    	<select id="selectAll" resultType="com.proj.beans.cookingcls.RecipeDTO">
+    		select * from recipe 
+    		ORDER BY
+    		RID ASC
+ 		
+    	</select>
+    
+    	<select id="selectBykind" resultType="com.proj.beans.cookingcls.RecipeDTO">
+    		select * from recipe
+    		where kind = #{kind}
+    	</select>
+    
+    
+    	<delete id="deleteByUserRid" flushCache="true" parameterType="com.proj.beans.cookingcls.RecipeDTO">
+    		delete from recipe where RID = #{rid}
+    	
+    	</delete>
+    
+    
+    
+    	<insert id="insert" flushCache="true" parameterType = "com.proj.beans.cookingcls.RecipeDTO"
+    		keyProperty="rid" useGeneratedKeys="true" keyColumn="rid">
+    		insert INTO RECIPE 
+    			(RID,NAME,TASTE,KIND,IMG,INGREDIENT,
+    			RECIPE_1,RECIPE_2,RECIPE_3,RECIPE_4,RECIPE_5,RECIPE_6
+    			,RECIPE_7,RECIPE_8,RECIPE_9,RECIPE_10)
+    		VALUES
+    			(RECIPE_SEQ.nextval,#{name},#{taste},#{kind},#{img},#{ingredient}
+    			,#{recipe_1},#{recipe_2},
+      #{recipe_3},#{recipe_4},#{recipe_5},#{recipe_6},
+      #{recipe_7},#{recipe_8},#{recipe_9},#{recipe_10})
+    			
+    			
+    			  
+    	</insert>
+    	
+    	<insert id="preference" flushCache="true">
+			insert into r_like
+			(user_id, user_rid, preference)
+			values
+			((select user_id from user_info where email = #{user_id}), #{user_rid}, #{preference})
+		</insert>
+		
+		<select id="preferenceChk" resultType="com.proj.beans.cookingcls.PreferenceDTO">
+			select * FROM r_like where user_id = (select user_id from user_info where email = #{user_id}) and user_rid = #{user_rid}
+		</select>
+		
+		<delete id="preferenceDel" flushCache="true">
+			delete from r_like where user_id = (select user_id from user_info where email = #{user_id}) and user_rid = #{user_rid}
+		</delete>
+    	<update flushCache="true" id="update"> 
+	    	UPDATE recipe SET name=#{a.name}, kind=#{a.kind}, taste=#{a.taste}, img=#{a.img} 
+	    	,ingredient=#{a.ingredient}, recipe_1=#{a.recipe_1},recipe_2=#{a.recipe_2},recipe_3=#{a.recipe_3}
+	    	,recipe_4=#{a.recipe_4},recipe_5=#{a.recipe_5},recipe_6=#{a.recipe_6},recipe_7=#{a.recipe_7}
+	    	, recipe_8=#{a.recipe_8},recipe_9=#{a.recipe_9},recipe_10=#{a.recipe_10} WHERE rid=#{param1} 
+    	</update>
+    </mapper>

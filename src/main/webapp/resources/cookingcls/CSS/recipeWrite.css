@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+.tt{
+    top: 111px;
+    position: relative;
+    left: 50%;
+    margin-left: -600px;
+    width: 1200px;
+    height: auto;
+    min-height: 700px;
+    margin-bottom: 121px;
+}
+
+.cardhei{
+    height: auto;
+   
+}
+
+.dis{
+    display: inline-block;
+}
+
+.cc{
+    height: 300px;
+    width: 265px;
+    margin: 15px;
+}
+
+.recipe_bnt{
+    margin-top: 10px;
+}
+
+.imgcard{
+    width: 270px;
+    height: 200px;
+    margin: 7px;
+}
+
+.card-body{
+    margin: 7px;
+    
+}
+
+
+.search{
+    width: 400px;
+}
+
+.search-btn{
+    border-radius: 3px;
+   
+}
+
+.over{
+    overflow: auto;
+}
+
+#plusbox{
+    width: 500px;
+    height: auto;
+}
+
+#plusbox2{
+    width: 350px;
+}

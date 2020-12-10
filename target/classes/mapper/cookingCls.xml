@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.command.ajax.cookingcls.ACookingDAO">
+    
+    <select id="selectAll" resultType="com.proj.beans.cookingcls.CookingDTO">
+    	select C.*, U.img from cook_class C, user_info U where C.user_id = U.user_id
+    </select>
+    
+    <select id="selectBycno" resultType="com.proj.beans.cookingcls.CookingDTO">
+    	select T.* from 
+	 (select C.*, U.img from cook_class C, user_info U where C.user_id = U.user_id) T
+    where cno = #{cno}
+    </select>
+    
+    <!-- 내가 개설한 강의  a_cook_class-->
+    <select id="myCls" resultType="com.proj.beans.cookingcls.CookingDTO">
+    	
+    	select * from a_cook_class where user_id= (select user_id from user_info where email = #{email})
+    
+    </select>
+    
+    <!-- 내가 신청한 강의  A_REG_PEOPLE-->
+    
+
+    <select id ="signCls" resultType = "com.proj.beans.cookingcls.CookingDTO">
+    	select CC.* from cook_class CC,
+    	(select cno from reg_people where user_id = (select user_id from user_info where email = #{email})) C
+    	where CC.cno = C.cno
+    	
+    </select>
+    
+    <select id="selectAdmin" resultType="com.proj.beans.cookingcls.CookingDTO">
+    	select C.*, U.img from a_cook_class C, user_info U where C.user_id = U.user_id order by chk
+    
+    </select> 
+   
+    <insert id="insertCook" flushCache="true" parameterType="com.proj.beans.cookingcls.CookingDTO">
+    INSERT INTO 
+    	COOK_CLASS (CNO ,NAME ,PEOPLE ,KIND ,ENDDATE ,DDAY ,C_CONTENT ,C_ADDRESS ,C_PRICE ,USER_ID)
+	VALUES 
+		(cook_class_seq.nextval, #{name},#{people},#{kind},#{enddate},#{dday},#{c_content},#{c_address},#{c_price},
+		#{user_id})
+    </insert>
+    
+ 
+    <!-- a_cook_class -->
+    <insert id="insert" flushCache="true" parameterType="com.proj.beans.cookingcls.CookingDTO">
+    INSERT INTO 
+    	A_COOK_CLASS (CNO ,NAME ,PEOPLE ,KIND ,ENDDATE ,DDAY ,C_CONTENT ,C_ADDRESS ,C_PRICE ,USER_ID, CHK)
+	VALUES 
+		(cook_class_seq.nextval, #{name},#{people},#{kind},#{enddate},#{dday},#{c_content},#{c_address},#{c_price},
+		#{user_id},0)
+    </insert>
+
+	<update id="updateChk" parameterType="com.proj.beans.cookingcls.CookingDTO">
+		update a_cook_class 
+		set chk = #{chk}
+		where cno = #{cno}
+	</update>
+	
+	 <select id="selectByaCno" resultType="com.proj.beans.cookingcls.CookingDTO">
+	 select T.* from 
+	 (select C.*, U.img from a_cook_class C, user_info U where C.user_id = U.user_id) T
+    where cno = #{cno}
+    </select>
+	
+	<delete id = "deleteByAcno" parameterType="com.proj.beans.cookingcls.CookingDTO" flushCache="true">
+		delete from a_cook_class where cno = #{cno}
+	</delete>
+
+
+    </mapper>

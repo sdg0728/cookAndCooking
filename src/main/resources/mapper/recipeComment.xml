@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="com.command.ajax.cookingcls.RecipeCommentDAO">
+    
+    
+    	<insert id="insertComment" flushCache="true" parameterType="com.proj.beans.cookingcls.RecipeCommentDTO">
+    	
+    		INSERT INTO R_COMMENT (CID, CONTENT, REGDATE, RID, USER_ID)
+			VALUES (recipe_comment_seq.nextval, #{content}, sysdate, #{rid}, (select user_id from user_info where email = #{username}))
+    	
+    	</insert>
+    	
+    	<select id="selectByrid" resultType="com.proj.beans.cookingcls.RecipeCommentDTO">
+    		select * from 
+    		(select R.CID,R.content,U.EMAIL , U.USER_ID, U.name, R.rid from user_info U, r_comment R where U.user_id = R.user_id) N
+    		where N.rid = #{rid}
+    	
+    	</select>
+    	
+    	<delete id="deleteComment" parameterType="com.proj.beans.cookingcls.RecipeCommentDTO" flushCache="true">
+    		delete from r_comment where cid = #{cid}
+    	</delete>
+    	
+    </mapper>

@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+.modal{
+	overflow: auto;
+}
+
+.tt{
+    top: 111px;
+    position: relative;
+    left: 50%;
+    margin-left: -600px;
+    width: 1200px;
+    height: auto;
+    min-height: 700px;
+    margin-bottom: 121px;
+}
+
+.cardhei{
+    height: auto;
+   
+}
+
+.dis{
+    display: inline-block;
+}
+
+.cc{
+    height: 300px;
+    width: 265px;
+    margin: 15px;
+}
+
+.recipe_bnt{
+    margin-top: 10px;
+}
+
+.comment{
+	height : 90px;
+	overflow : auto;
+}
+
+
+.imgcard{
+    width: 270px;
+    height: 200px;
+    margin: 7px;
+}
+
+.card-body{
+    margin: 7px;
+}
+
+
+.search{
+    width: 400px;
+}
+
+.search-btn{
+    border-radius: 3px;
+   
+}
+
+.over{
+    overflow: auto;
+}
+
+#modalImg_box {
+   width: 200px;
+   height: 200px;
+   display: inline-block;
+   margin: 0 20px 20px 0;
+}
+
+#modal_img {
+   width: 100%;
+   height: 100%;
+}
+
+.modal-dialog{
+	height: auto;
+}
+
+#modal_size{
+	height: 100%;
+}
+
+.starPoint{
+	width: 250px;
+	margin-top: 0;
+	display: inline-block;
+}

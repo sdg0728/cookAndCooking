@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.command.ajax.cookingcls.CookRegDAO">
+    
+    <insert id="cookRegInsert" flushCache="true" parameterType="com.proj.beans.cookingcls.CookRegDTO">
+    
+    	insert into reg_people (cno, user_id) values (#{cno}, 
+    	(select user_id from user_info where email = #{username}))
+    
+    </insert>
+    
+    <select id="cookRegSel" resultType="com.proj.beans.cookingcls.CookRegDTO">
+    	select * from reg_people where cno = #{cno}
+    </select>
+    
+    
+    </mapper>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.proj.beans.admin.RecipeAdminDAO">
+	<!-- Controller -->
+	<select id="select" resultType="com.proj.beans.admin.AdminRecipeProductDTO">
+	<![CDATA[
+		SELECT A.* FROM  
+		(SELECT ROWNUM AS RNUM, T.* FROM  (SELECT * FROM R_PRODUCT ORDER BY PID DESC) T) A
+		WHERE A.RNUM >= #{start} AND A.RNUM <= #{end}
+	]]>
+	</select>
+	
+	<select id="countAll" resultType="int">
+		SELECT COUNT(*) FROM R_PRODUCT
+	</select>
+	
+	<!-- RestController -->
+	<select id="search" resultType="com.proj.beans.admin.AdminRecipeProductDTO">
+		SELECT * FROM R_PRODUCT WHERE P_NAME LIKE #{search}	
+	</select>
+	
+	<delete id="deleteRecipe" flushCache="true">
+		DELETE FROM R_PRODUCT
+		WHERE PID IN (
+		<foreach collection="pid" item="item" index="index" separator=",">${item}</foreach>
+		)
+	</delete>
+	
+	<insert id="addRecipeProduct" parameterType="com.proj.beans.admin.RecipeProductDTO">
+		INSERT INTO R_PRODUCT
+		(PID, P_PRICE, P_CONTENT, P_COUNT, P_NAME, P_IMG, P_KIND, P_TASTE)
+		VALUES
+		(PRODUCT_SEQ.NEXTVAL, #{p_price}, #{p_content}, #{p_count}, #{p_name}, #{p_img}, #{kind}, #{taste})
+	</insert>
+	
+	<select id="selectByPid" resultType="com.proj.beans.admin.RecipeProductDTO">
+		SELECT * FROM R_PRODUCT WHERE PID = #{pid}
+	</select>
+	
+	<update id="recipeUpdate" flushCache="true">
+		UPDATE R_PRODUCT SET
+		P_PRICE = #{p_price},
+		P_CONTENT = #{p_content},
+		P_COUNT = #{p_count},
+		P_IMG = #{p_img},
+		P_KIND = #{p_kind},
+		P_TASTE = #{p_taste}
+		WHERE PID = #{pid}		
+	</update>
+	
+	<select id="selectSelList" resultType="com.proj.beans.purchase.PurchaseDTO">
+		<![CDATA[
+		SELECT A.* FROM  
+		(SELECT ROWNUM AS RNUM, T.* FROM (SELECT * FROM A_PURCHASE ORDER BY BUYDATE DESC) T) A
+		WHERE A.RNUM >= #{start} AND A.RNUM <= #{end}
+		]]>
+	</select>
+	
+	<select id="adminCountAll" resultType="int">
+		<![CDATA[
+			SELECT count(*) FROM A_PURCHASE
+		]]>
+	</select>
+	
+	<select id="selectPrice" resultType="com.proj.beans.admin.AdminTotalPrice">
+		SELECT PRICE, COUNT FROM A_PURCHASE
+	</select>
+	
+	<select id="selectPriceByDate" resultType="com.proj.beans.admin.AdminTotalPrice">
+		SELECT PRICE, COUNT FROM A_PURCHASE WHERE TO_CHAR(BUYDATE, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY') AND TO_CHAR(BUYDATE, 'MM') = TO_CHAR(TO_DATE(#{month},'MM'), 'MM')
+	</select>
+	
+	<update id="updateDeliver" flushCache="true">
+		UPDATE PURCHASE SET
+		DELIVERCHK = #{deliverchk}
+		WHERE PURCHASENO = #{purchaseno}
+	</update>
+	<update id="updateADeliver" flushCache="true">
+		UPDATE A_PURCHASE SET
+		DELIVERCHK = #{deliverchk}
+		WHERE PURCHASENO = #{purchaseno}
+	</update>
+	
+	<select id="serchPurchase1" resultType="com.proj.beans.purchase.PurchaseDTO">
+		SELECT * FROM A_PURCHASE WHERE PURCHASENO = #{search} OR NAME = #{search}
+	</select>
+	
+	<select id="serchPurchase2" resultType="com.proj.beans.purchase.PurchaseDTO">
+		SELECT * FROM A_PURCHASE WHERE NAME = #{search}
+	</select>
+	
+	<select id="selectApplyList" resultType="com.proj.beans.purchase.ApplyRecipeDTO">
+		SELECT * FROM A_APPLY_RECIPE ORDER BY REGDATE DESC	
+	</select>
+	
+	<select id="applyDetail" resultType="com.proj.beans.purchase.ApplyRecipeDTO">
+		SELECT * FROM A_APPLY_RECIPE WHERE APPLYNO = #{applyno}
+	</select>
+	
+	<update id="applyCheck" flushCache="true">
+		UPDATE A_APPLY_RECIPE SET
+		A_CHECK = #{a_check}
+		WHERE APPLYNO = #{applyno}
+	</update>
+	
+	<select id="applyListByCheck" resultType="com.proj.beans.purchase.ApplyRecipeDTO">
+		SELECT * FROM A_APPLY_RECIPE WHERE A_CHECK = #{a_check}
+	</select>
+	
+	<select id="applyAllList" resultType="com.proj.beans.purchase.ApplyRecipeDTO">
+		SELECT * FROM A_APPLY_RECIPE
+	</select>
+	
+	<select id="applySearch" resultType="com.proj.beans.purchase.ApplyRecipeDTO">
+		SELECT * FROM A_APPLY_RECIPE WHERE U_NAME LIKE #{search}
+	</select>
+	
+	<insert id="applyProduct" flushCache="true">
+      INSERT INTO R_PRODUCT
+      SELECT PRODUCT_SEQ.nextval, A_PRICE, A_CONTENT, A_COUNT, A_NAME, A_IMG, A_KIND, A_TASTE FROM A_APPLY_RECIPE WHERE APPLYNO = #{applyno}
+   </insert>
+</mapper>

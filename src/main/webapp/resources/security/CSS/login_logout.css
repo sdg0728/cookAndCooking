@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.username, .logout{
+	color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 38px 25px;
+    text-transform: uppercase;
+    line-height: 20px;
+    position: relative;
+    display: block;
+}
+.logout{
+	cursor: pointer;
+}

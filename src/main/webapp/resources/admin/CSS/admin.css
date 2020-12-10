@@ -1,0 +1,12 @@
+.space {
+	margin-top: 10%;
+}
+
+.small_space {
+	margin-top: 5%;
+}
+
+.naemes > h2 {
+	display: inline;
+	margin-right: 200px;
+}

@@ -1,0 +1,11 @@
+.prod-content{
+    height: 320px;
+}
+
+.price::after{
+    content: "원";
+}
+
+.count::after{
+    content: "개";
+}

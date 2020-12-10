@@ -1,0 +1,298 @@
+@charset "UTF-8";
+
+body {
+		background: #fff;
+		padding-top: 1em;
+}
+
+	
+body > section {
+    padding: 10px 0;
+}
+
+#logo_sec {
+	margin: 0 auto;
+	top: 0;
+	position: relative;
+}
+
+#logo-box {
+	text-align: center;
+}
+
+#center-logo {
+	max-height: 200px;
+	
+}
+
+#sign_secA > .container {
+    padding: 16px;
+}
+
+label {
+    font-size: 2.0rem;
+}
+
+input[type=email], input[type=password], input[type=text], select {
+    width: 100%;
+    padding: 6px 20px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.sign_space {
+	padding-bottom: 6px;
+}
+
+button {
+	width: 100%;	
+}
+
+section p {
+    color: #ee1100;
+    font-size: 0.5em;
+    margin-bottom: 2.5rem;
+}
+
+#sign_secA > .container > button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+}
+
+#sign_secA > .container > button:hover {
+    opacity: 0.8;
+}
+
+.filebox label {
+	margin:0;
+	display: inline-block;
+	padding: .5em .75em; 
+	color: #999; 
+	font-size: inherit; 
+	line-height: normal; 
+	vertical-align: middle; 
+	background-color: #fdfdfd; 
+	cursor: pointer; 
+	border: 1px solid #ebebeb; 
+	border-bottom-color: #e2e2e2; 
+	border-radius: .25em; 
+}
+ 
+.filebox input[type="file"] {
+	/* 파일 필드 숨기기 */ 
+	position: absolute; 
+	width: 1px; 
+	height: 1px; 
+	padding: 0; 
+	margin: -1px; 
+	overflow: hidden; 
+	clip:rect(0,0,0,0); 
+	border: 0; 
+}
+
+/* named upload */ 
+.filebox .upload-name { 
+	margin:0;
+	display: inline-block; 
+	padding: .5em .75em; 
+	/* label의 패딩값과 일치 */ 
+	font-size: inherit; 
+	font-family: inherit; 
+	line-height: normal; 
+	vertical-align: middle; 
+	background-color: #f5f5f5; 
+	border: 1px solid #ebebeb; 
+	border-bottom-color: #e2e2e2; 
+	border-radius: .25em; 
+	-webkit-appearance: none; 
+	/* 네이티브 외형 감추기 */ 
+	-moz-appearance: none; 
+	appearance: none; 
+}
+
+/* imaged preview */ 
+.filebox .upload-display { 
+	/* 이미지가 표시될 지역 */ 
+	margin-bottom: 5px; 
+}
+
+.link_space {
+	margin-top: 0.5rem;
+	margin-bottom: 2.5rem;
+}
+
+.go_dropOut {
+	float: right;
+	text-decoration: none;
+	color: black;
+}
+
+button {
+	width: 100%;	
+}
+
+.box70 {
+	width: 100%;
+	display: flex;
+}
+
+#input_name {
+	width: 70%;
+}
+
+#name_load {
+	margin-left: 2%;
+	width: 28%;
+}
+
+#btn-password {
+	width: 100%;
+	display: block;
+}
+
+#btn_update {
+	height: 4.5rem;
+}
+
+@media (max-width: 767px){
+    select {
+        width: 100%;
+        
+    }
+    
+    .imgBtn {
+    	width: 100%;
+    }
+}
+
+@media (min-width: 768px){
+
+    #sign_secA  > .container { 
+        display: block;
+        max-width: 600px;  
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 22px;
+
+    }
+    
+    .filebox .upload-display { display: inline-block; margin-right: 5px; margin-bottom: 0; }
+
+}
+
+.filebox .upload-thumb-wrap { 
+	/* 추가될 이미지를 감싸는 요소 */ 
+	display: inline-block; 
+	width: 54px; 
+	padding: 2px; 
+	vertical-align: middle; 
+	border: 1px solid #ddd; 
+	border-radius: 5px; 
+	background-color: #fff; 
+}
+
+.filebox .upload-display img { 
+	/* 추가될 이미지 */ 
+	display: block; 
+	max-width: 100%; 
+	width: 100% \9;
+	height: auto; 
+}
+
+#roadFullAddr {
+    width: 70%;
+}
+
+.address_box{
+    height: 45px;
+}
+
+.address_box *{
+    float: left;
+}
+
+#addr_btn {
+	width: 100%;
+	height: 85%;
+	margin-bottom: 5%;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.btn-file input[type=button] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+
+.badgebox
+{
+    opacity: 0;
+}
+
+.badgebox + .badge
+{
+    /* Move the check mark away when unchecked */
+    text-indent: -999999px;
+    /* Makes the badge's width stay the same checked and unchecked */
+	width: 27px;
+}
+
+.badgebox:focus + .badge
+{
+    /* Set something to make the badge looks focused */
+    /* This really depends on the application, in my case it was: */
+    
+    /* Adding a light border */
+    box-shadow: inset 0px 0px 5px;
+    /* Taking the difference out of the padding */
+}
+
+.badgebox:checked + .badge
+{
+    /* Move the check mark back when checked */
+	text-indent: 0;
+}
+
+label {
+	font-size: 2rem;
+}
+
+.dis > label {
+	font-size: 1.5rem;
+}
+
+.clear {
+	clear: both;
+}

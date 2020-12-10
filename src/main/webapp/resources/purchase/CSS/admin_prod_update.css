@@ -1,0 +1,12 @@
+.btn-wrap {
+	width: 100%;
+	height: 50px;
+}
+
+.btn-wrap button {
+	float: right;
+}
+
+.price::after {
+	content: "원";
+}

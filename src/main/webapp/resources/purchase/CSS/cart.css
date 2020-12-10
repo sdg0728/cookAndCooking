@@ -1,0 +1,131 @@
+.total::after, .price::after {
+	content: "원";
+}
+
+.count::after {
+	content: "개";
+}
+
+.btn-cancle {
+	width: 100px;
+}
+
+.btn-cancle {
+	margin-top: 13.5px;
+}
+
+.goDetail {
+	cursor: pointer;
+}
+
+.btn-wrap {
+	width: 100%;
+	height: 50px;
+}
+
+.btn-wrap button {
+	margin-left: 10px;
+	float: right;
+}
+
+button a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.form-check {
+	position: relative;
+	display: block;
+	padding-left: 1.25rem;
+	color: #000;
+	font-size: 20px;
+}
+
+.form-check-input {
+	position: absolute;
+	margin-top: 0.3rem;
+	margin-left: -1.25rem;
+}
+
+.form-check-inline {
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	-ms-flex-align: center;
+	align-items: center;
+	padding-left: 0;
+	margin-right: 0.75rem;
+}
+
+.form-check-inline .form-check-input {
+	position: static;
+	margin-top: 0;
+	margin-right: 0.3125rem;
+	margin-left: 0;
+}
+
+.deliver-info-wrap {
+	width: 100%;
+	height: auto;
+	margin-top: 50px;
+}
+
+.radio-btn {
+	margin-right: 20px;
+}
+
+.inputs {
+	width: 100%;
+	height: auto;
+	margin-top: 20px;
+}
+
+.form-group label {
+	font-size: 20px;
+	color: #000;
+}
+
+.address-input label {
+	display: block;
+}
+
+.address-input input {
+	display: inline-block;
+	width: 100%;
+}
+
+.address-input button {
+	width: 9.7%;
+}
+
+#total-price {
+	height: 30px;
+	width: 100%;
+	text-align: right;
+	font-size: 25px;
+	color: black;
+	margin-bottom: 15px;
+}
+
+#total-price::before {
+	content: "총 결제금액: ";
+}
+
+#total-price::after {
+	content: "원";
+}
+
+.btn-full {
+	width: 100%;
+}
+
+#setLine {
+	width: 100%; height : 0px;
+	border-bottom: 1px solid #ddd;
+	height: 0px;
+}
+
+.deliver-info-wrap>h3 {
+	color: #000;
+	margin-bottom: 20px;
+	font-weight: 800;
+}

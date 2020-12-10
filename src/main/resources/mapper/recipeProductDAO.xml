@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.proj.beans.purchase.RecipeProductDAO">
+	<select id="select" resultType="com.proj.beans.purchase.RecipeProductDTO">
+		SELECT P.*, R.R_SCORE FROM R_PRODUCT P, (SELECT T.PID PID ,AVG(T.R_SCORE) R_SCORE FROM P_REVIEW T GROUP BY PID) R 
+		WHERE P.PID = R.PID(+)
+	</select>
+	<select id="selectByPid" resultType="com.proj.beans.purchase.RecipeProductDTO">
+		SELECT A.* FROM
+		(SELECT P.*, R.R_SCORE FROM R_PRODUCT P, (SELECT T.PID PID ,AVG(T.R_SCORE) R_SCORE FROM P_REVIEW T GROUP BY PID) R 
+		WHERE P.PID = R.PID(+)) A
+		WHERE A.PID = #{pid} 
+	</select>
+	
+	<select id="selectByKind" resultType="com.proj.beans.purchase.RecipeProductDTO">
+		SELECT A.* FROM
+		(SELECT P.*, R.R_SCORE FROM R_PRODUCT P, (SELECT T.PID PID ,AVG(T.R_SCORE) R_SCORE FROM P_REVIEW T GROUP BY PID) R 
+		WHERE P.PID = R.PID(+)) A
+		WHERE A.p_kind = #{p_kind}  
+	</select>
+	
+	<select id="selectByTaste" resultType="com.proj.beans.purchase.RecipeProductDTO">
+		SELECT A.* FROM
+		(SELECT P.*, R.R_SCORE FROM R_PRODUCT P, (SELECT T.PID PID ,AVG(T.R_SCORE) R_SCORE FROM P_REVIEW T GROUP BY PID) R 
+		WHERE P.PID = R.PID(+)) A
+		WHERE A.p_taste = #{p_taste}
+	</select>
+	
+	<select id="selectByKindAndTaste" parameterType="hashmap" resultType="com.proj.beans.purchase.RecipeProductDTO">
+		SELECT A.* FROM
+		(SELECT P.*, R.R_SCORE FROM R_PRODUCT P, (SELECT T.PID PID ,AVG(T.R_SCORE) R_SCORE FROM P_REVIEW T GROUP BY PID) R 
+		WHERE P.PID = R.PID(+)) A
+		WHERE A.p_kind = #{p_kind} AND A.p_taste = #{p_taste}
+	</select>
+	
+	<select id="reviewByPid" resultType="com.proj.beans.purchase.ProductReviewDTO">
+		SELECT R.*, I.EMAIL FROM P_REVIEW R, USER_INFO I WHERE PID = #{pid} AND R.USER_ID = I.USER_ID
+	</select>
+	
+	<select id="reviewByPidToCSV" resultType="com.proj.beans.purchase.ProductReviewDTO">
+		SELECT user_id, pid, r_score FROM P_REVIEW
+	</select>
+	
+	
+	
+	<insert id="reviewOk" flushCache="true">
+		INSERT INTO P_REVIEW
+		(PRID, R_COMMENT, R_IMG, R_SCORE, USER_ID, PID, R_REGDATE)
+		VALUES
+		(PRODUCT_REVIEW_SEQ.NEXTVAL, #{r_comment}, #{r_img}, #{r_score}, (SELECT USER_ID FROM USER_INFO WHERE EMAIL = #{email}), #{pid}, SYSDATE)
+	</insert>
+	<insert id="applyRecipe" flushCache="true" parameterType="com.proj.beans.purchase.ApplyRecipeDTO">
+		INSERT INTO A_APPLY_RECIPE
+		(APPLYNO, A_PRICE, A_CONTENT, A_COUNT, A_NAME, A_IMG, A_KIND, A_TASTE, U_NAME, A_SELL, A_CHECK, REGDATE)
+		VALUES
+		(APPLY_RECIPE_SEQ.NEXTVAL, #{a_price}, #{a_content}, #{a_count}, #{a_name}, #{a_img}, #{a_kind}, #{a_taste}, (SELECT NAME FROM USER_INFO WHERE EMAIL = #{u_name}), 0, 0, SYSDATE)
+	</insert>
+</mapper>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.command.ajax.userRecipe.UserRecipeDAO">
+	<select id="selectByUid" 
+		resultType="com.proj.beans.userRecipe.RecipeWriteDTO">
+		SELECT * FROM user_recipe WHERE user_rid=#{user_rid}
+	</select>
+	
+
+	
+</mapper>

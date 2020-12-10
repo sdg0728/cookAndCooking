@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+.content-wrap {
+	width: 800px;
+	height: 1050px;
+	margin: 4% auto 0 auto;
+}
+
+#myData_box {
+	width: 800px;
+	height: 1050px;
+	position: relative;
+	text-align: center;
+}
+
+#myImg_box {
+	width: 300px;
+	height: 300px;
+	margin: 0 auto 4% auto;
+	position: relative;
+}
+
+#myImg_box > img {
+	width: 100%;
+	height: 100%;
+}
+
+#myEmail_box {
+	width: 100%;
+	position: relative;
+	margin-bottom: 4%;
+	text-align: left; 
+}
+
+#myName_box {
+	width: 100%;
+	position: relative;
+	margin-bottom: 4%;
+	text-align: left; 
+}
+
+#myAddress_box {
+	width: 100%;
+	position: relative;
+	margin-bottom: 4%;
+	text-align: left; 
+}
+
+#myTel_box {
+	width: 100%;
+	position: relative;
+	margin-bottom: 4%;
+	text-align: left; 
+}
+
+#myKind_box {
+	width: 100%;
+	position: relative;
+	margin-bottom: 4%;
+	text-align: left; 
+}
+
+#myTaste_box {
+	width: 100%;
+	position: relative;
+	margin-bottom: 4%;
+	text-align: left; 
+}
+
+#myScore_box {
+	width: 100%;
+	position: relative;
+	margin-bottom: 4%;
+	text-align: left; 
+}
+
+#myAccountBtn_box {
+	width: 100%;
+	position: relative;
+	margin-bottom: 4%;
+	text-align: left; 
+}
+
+#myAccountBtn {
+	width: 150px;
+	height: 50px;
+	margin-right: 1%; 
+	font-size: 2rem;
+	line-height: 35px;
+}
+
+#myClassBtn {
+	width: 150px;
+	height: 50px;
+	font-size: 2rem;
+	line-height: 35px;
+}
+
